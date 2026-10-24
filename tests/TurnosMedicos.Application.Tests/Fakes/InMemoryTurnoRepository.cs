@@ -12,4 +12,9 @@ public class InMemoryTurnoRepository : ITurnoRepository
         Turnos.Add(turno);
         return Task.CompletedTask;
     }
+
+    public Task<Turno?> ObtenerPorIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return Task.FromResult(Turnos.FirstOrDefault(t => t.Id == id));
+    }
 }

@@ -1,6 +1,38 @@
 @TurnosMedicos.Api_HostAddress = http://localhost:5268
 
-GET {{TurnosMedicos.Api_HostAddress}}/weatherforecast/
+### Reservar un turno (201 Created)
+# @name reservar
+POST {{TurnosMedicos.Api_HostAddress}}/turnos
+Content-Type: application/json
+
+{
+  "afiliadoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "profesionalId": "9b2f4c1e-8d3a-4f6b-a1c2-7e5d9f0b3a48",
+  "inicio": "2027-03-15T13:00:00Z"
+}
+
+### Consultar el turno recién reservado (200 OK)
+GET {{TurnosMedicos.Api_HostAddress}}/turnos/{{reservar.response.body.$.id}}
 Accept: application/json
 
-###
+### Turno inexistente (404 Not Found)
+GET {{TurnosMedicos.Api_HostAddress}}/turnos/00000000-0000-0000-0000-000000000000
+Accept: application/json
+
+### Reservar en el pasado (422 Unprocessable Entity)
+POST {{TurnosMedicos.Api_HostAddress}}/turnos
+Content-Type: application/json
+
+{
+  "afiliadoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "profesionalId": "9b2f4c1e-8d3a-4f6b-a1c2-7e5d9f0b3a48",
+  "inicio": "2020-01-01T10:00:00Z"
+}
+
+### Body inválido (400 Bad Request, validación automática de [ApiController])
+POST {{TurnosMedicos.Api_HostAddress}}/turnos
+Content-Type: application/json
+
+{
+  "afiliadoId": "no-es-un-guid"
+}
