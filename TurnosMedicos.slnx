@@ -2,5 +2,6 @@
   <Folder Name="/src/">
     <Project Path="src/TurnosMedicos.Application/TurnosMedicos.Application.csproj" />
     <Project Path="src/TurnosMedicos.Domain/TurnosMedicos.Domain.csproj" />
+    <Project Path="src/TurnosMedicos.Infrastructure/TurnosMedicos.Infrastructure.csproj" />
   </Folder>
 </Solution>
