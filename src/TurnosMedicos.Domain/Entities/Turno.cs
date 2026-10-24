@@ -1,4 +1,5 @@
 using TurnosMedicos.Domain.Enums;
+using TurnosMedicos.Domain.Exceptions;
 
 namespace TurnosMedicos.Domain.Entities;
 
@@ -12,8 +13,13 @@ public class Turno
 
     private Turno() { }
 
-    public static Turno Reservar(Guid afiliadoId, Guid profesionalId, DateTime inicio)
+    public static Turno Reservar(Guid afiliadoId, Guid profesionalId, DateTime inicio, DateTime ahora)
     {
+        if (inicio <= ahora)
+        {
+            throw new DomainException("El turno debe reservarse para una fecha y hora futura.");
+        }
+
         return new Turno
         {
             Id = Guid.NewGuid(),
