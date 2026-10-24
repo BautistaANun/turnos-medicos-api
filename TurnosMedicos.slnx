@@ -5,4 +5,8 @@
     <Project Path="src/TurnosMedicos.Domain/TurnosMedicos.Domain.csproj" />
     <Project Path="src/TurnosMedicos.Infrastructure/TurnosMedicos.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TurnosMedicos.Application.Tests/TurnosMedicos.Application.Tests.csproj" />
+    <Project Path="tests/TurnosMedicos.Domain.Tests/TurnosMedicos.Domain.Tests.csproj" />
+  </Folder>
 </Solution>
