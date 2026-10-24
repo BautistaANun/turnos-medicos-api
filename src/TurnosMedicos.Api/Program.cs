@@ -2,6 +2,7 @@ using Scalar.AspNetCore;
 using TurnosMedicos.Api.ErrorHandling;
 using TurnosMedicos.Application;
 using TurnosMedicos.Infrastructure;
+using TurnosMedicos.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,11 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(connectionString);
 
 var app = builder.Build();
+
+if (app.Configuration.GetValue<bool>("Database:AplicarMigracionesAlIniciar"))
+{
+    await app.Services.AplicarMigracionesAsync();
+}
 
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();

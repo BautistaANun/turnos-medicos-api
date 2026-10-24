@@ -17,5 +17,18 @@ services:
       retries: 10
       start_period: 20s
 
+  api:
+    build: .
+    container_name: turnos-api
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__TurnosDb: "Server=sqlserver,1433;Database=TurnosMedicos;User Id=sa;Password=Turnos_Dev_2026!;TrustServerCertificate=True"
+      Database__AplicarMigracionesAlIniciar: "true"
+    ports:
+      - "8080:8080"
+
 volumes:
   sqlserver-data:
