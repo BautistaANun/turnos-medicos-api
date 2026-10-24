@@ -1,0 +1,6 @@
+@TurnosMedicos.Api_HostAddress = http://localhost:5268
+
+GET {{TurnosMedicos.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
