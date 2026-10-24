@@ -110,13 +110,21 @@ tests/
 
 > **Nota:** la contraseña de SQL Server que aparece en `compose.yaml` y `appsettings.Development.json` es solo para el contenedor local. En un entorno real vendría de Azure Key Vault o de variables secretas del pipeline.
 
+## Integración continua
+
+El pipeline de **Azure DevOps** ([`azure-pipelines.yml`](azure-pipelines.yml)) corre en cada push y en cada pull request a `main`:
+
+1. Instala el .NET SDK 10.
+2. Restaura dependencias y compila en `Release`.
+3. Corre los tests y publica los resultados y la cobertura de código en Azure DevOps.
+4. Verifica que la imagen Docker compila.
+
 ## Stack
 
-.NET 10 · ASP.NET Core (controllers) · EF Core 10 · SQL Server 2022 · xUnit · Docker Compose · Scalar (OpenAPI)
+.NET 10 · ASP.NET Core (controllers) · EF Core 10 · SQL Server 2022 · xUnit · Docker Compose · Scalar (OpenAPI) · Azure Pipelines
 
 ## Próximos pasos
 
-- Pipeline de CI en Azure DevOps (build + tests en cada push).
 - Tests de integración contra SQL Server real con Testcontainers.
 - Regla de no superposición de turnos para un mismo profesional.
 - Contratos de request propios de la capa Api, separados de los commands de Application.
