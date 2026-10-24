@@ -15,6 +15,9 @@ Content-Type: application/json
 GET {{TurnosMedicos.Api_HostAddress}}/turnos/{{reservar.response.body.$.id}}
 Accept: application/json
 
+### Cancelar el turno recién reservado (204 No Content; si se repite, 422)
+POST {{TurnosMedicos.Api_HostAddress}}/turnos/{{reservar.response.body.$.id}}/cancelar
+
 ### Turno inexistente (404 Not Found)
 GET {{TurnosMedicos.Api_HostAddress}}/turnos/00000000-0000-0000-0000-000000000000
 Accept: application/json

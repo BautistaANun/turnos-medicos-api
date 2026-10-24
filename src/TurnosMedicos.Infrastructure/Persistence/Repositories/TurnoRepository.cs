@@ -16,4 +16,10 @@ public class TurnoRepository(TurnosDbContext dbContext) : ITurnoRepository
     {
         return dbContext.Turnos.FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
     }
+
+    public async Task ActualizarAsync(Turno turno, CancellationToken cancellationToken = default)
+    {
+        // El turno se obtuvo con este mismo DbContext, así que EF ya detectó los cambios (change tracking).
+        await dbContext.SaveChangesAsync(cancellationToken);
+    }
 }

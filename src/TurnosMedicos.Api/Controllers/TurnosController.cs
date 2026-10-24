@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TurnosMedicos.Api.Contracts;
+using TurnosMedicos.Application.Turnos.CancelarTurno;
 using TurnosMedicos.Application.Turnos.ObtenerTurno;
 using TurnosMedicos.Application.Turnos.ReservarTurno;
 
@@ -33,5 +34,19 @@ public class TurnosController : ControllerBase
         var turno = await handler.HandleAsync(new ObtenerTurnoQuery(id), cancellationToken);
 
         return turno is null ? NotFound() : Ok(turno);
+    }
+
+    [HttpPost("{id:guid}/cancelar")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status422UnprocessableEntity)]
+    public async Task<IActionResult> Cancelar(
+        Guid id,
+        [FromServices] CancelarTurnoHandler handler,
+        CancellationToken cancellationToken)
+    {
+        var cancelado = await handler.HandleAsync(new CancelarTurnoCommand(id), cancellationToken);
+
+        return cancelado ? NoContent() : NotFound();
     }
 }

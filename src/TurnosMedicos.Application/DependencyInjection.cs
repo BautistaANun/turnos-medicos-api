@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using TurnosMedicos.Application.Turnos.CancelarTurno;
 using TurnosMedicos.Application.Turnos.ObtenerTurno;
 using TurnosMedicos.Application.Turnos.ReservarTurno;
 
@@ -10,6 +11,7 @@ public static class DependencyInjection
     {
         services.AddScoped<ReservarTurnoHandler>();
         services.AddScoped<ObtenerTurnoHandler>();
+        services.AddScoped<CancelarTurnoHandler>();
 
         return services;
     }

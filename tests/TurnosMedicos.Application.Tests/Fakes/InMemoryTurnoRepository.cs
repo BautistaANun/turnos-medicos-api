@@ -17,4 +17,10 @@ public class InMemoryTurnoRepository : ITurnoRepository
     {
         return Task.FromResult(Turnos.FirstOrDefault(t => t.Id == id));
     }
+
+    public Task ActualizarAsync(Turno turno, CancellationToken cancellationToken = default)
+    {
+        // La lista guarda la misma instancia, así que los cambios ya quedaron aplicados.
+        return Task.CompletedTask;
+    }
 }
